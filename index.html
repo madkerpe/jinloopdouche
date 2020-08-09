@@ -11,7 +11,19 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <div id="clock">
-        <p class="time">{{ days }} : {{hours}} : {{minutes}} : {{seconds}}</p>
+        <div class="container" v-if="finished">
+            <h1> TOTEM START NU </h1>
+        </div>
+
+        <div class="container" v-else="finished">
+            <h1> JIN 2013 </h1>
+            <ul>
+              <li><span id="days">{{days}}</span>Days</li>
+              <li><span id="hours">{{hours}}</span>Hours</li>
+              <li><span id="minutes">{{minutes}}</span>Minutes</li>
+              <li><span id="seconds">{{seconds}}</span>Seconds</li>
+            </ul>
+        </div>
     </div>
 
     <script>
@@ -21,7 +33,8 @@
                 days: '',
                 hours: '',
                 minutes: '',
-                seconds: ''
+                seconds: '',
+                finished: false,
             }
         });
 
@@ -31,17 +44,24 @@
             day = hour * 24;
 
         var timerID = setInterval(updateTime, 1000);
-        let targetDate = new Date('Aug 10, 2020 00:13:00').getTime()
+        let targetDate = new Date('Aug 17, 2020 18:58:00').getTime()
 
         updateTime();
         function updateTime() {
             var currentDate = new Date().getTime();
             distance = targetDate - currentDate;
 
-            clock.days =  Math.floor(distance / (day))
-            clock.hours = Math.floor((distance % (day)) / (hour))
-            clock.minutes = Math.floor((distance % (hour)) / (minute))
-            clock.seconds = Math.floor((distance % (minute)) / second);
+            if (distance > 0) {
+                clock.finished = false
+                clock.days =  Math.floor(distance / (day))
+                clock.hours = Math.floor((distance % (day)) / (hour))
+                clock.minutes = Math.floor((distance % (hour)) / (minute))
+                clock.seconds = Math.floor((distance % (minute)) / second);
+            } else {
+                clock.finished = true
+            }
+
+            
         };
 
     </script>
