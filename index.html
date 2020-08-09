@@ -1,24 +1,49 @@
 <!doctype html>
 <html lang="en">
-    
+
 <head>
     <meta charset="utf-8">
     <title>JINLOOPDOUCHE</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-    <div id="app">
-        {{ message }}
+    <div id="clock">
+        <p class="time">{{ days }} : {{hours}} : {{minutes}} : {{seconds}}</p>
     </div>
+
     <script>
-        var app = new Vue({
-            el: '#app',
+        var clock = new Vue({
+            el: '#clock',
             data: {
-                message: 'Hello Vue!'
+                days: '',
+                hours: '',
+                minutes: '',
+                seconds: ''
             }
-        })
+        });
+
+        const second = 1000,
+            minute = second * 60,
+            hour = minute * 60,
+            day = hour * 24;
+
+        var timerID = setInterval(updateTime, 1000);
+        let targetDate = new Date('Aug 10, 2020 00:13:00').getTime()
+
+        updateTime();
+        function updateTime() {
+            var currentDate = new Date().getTime();
+            distance = targetDate - currentDate;
+
+            clock.days =  Math.floor(distance / (day))
+            clock.hours = Math.floor((distance % (day)) / (hour))
+            clock.minutes = Math.floor((distance % (hour)) / (minute))
+            clock.seconds = Math.floor((distance % (minute)) / second);
+        };
+
     </script>
 </body>
 </html>
