@@ -10,12 +10,12 @@
 <body>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-    <div id="clock">
-        <div class="container" v-if="finished">
+    <div id="clock" class="container">
+        <div v-if="finished">
             <h1> TOTEM START NU </h1>
         </div>
 
-        <div class="container" v-else="finished">
+        <div v-else="finished">
             <h1> JIN 2013 </h1>
             <ul>
               <li><span id="days">{{days}}</span>Days</li>
