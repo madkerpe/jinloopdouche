@@ -1,24 +1,85 @@
 <!doctype html>
 <html lang="en">
-    
+
 <head>
     <meta charset="utf-8">
     <title>JINLOOPDOUCHE</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-    <div id="app">
-        {{ message }}
+    <div id="clock" class="container">
+        <div v-if="finished">
+            <h1> TOTEM START NU </h1>
+        </div>
+
+        <div v-else="finished">
+            <h1> JIN 2003 </h1>
+            <ul>
+              <li><span id="days">{{days}}</span>Dagen</li>
+              <li><span id="hours">{{hours}}</span>Uren</li>
+              <li><span id="minutes">{{minutes}}</span>Minuten</li>
+              <li><span id="seconds">{{seconds}}</span>seconden</li>
+            </ul>
+        </div>
+    
+
+        <div id="names">
+            <ul>
+                <li>Louisa</li>
+                <li>Arnaud</li>
+                <li>Febe</li>
+                <li>Jules</li>
+                <li>Griet</li>
+                <li>Stef</li>
+                <li>Melissa</li>
+                <li>Geike</li>
+                <li>Bram</li>
+                <li>Ninke</li>
+            </ul>
+        </div>
     </div>
+
     <script>
-        var app = new Vue({
-            el: '#app',
+        var clock = new Vue({
+            el: '#clock',
             data: {
-                message: 'Hello Vue!'
+                days: '',
+                hours: '',
+                minutes: '',
+                seconds: '',
+                finished: false,
             }
-        })
+        });
+
+        const second = 1000,
+            minute = second * 60,
+            hour = minute * 60,
+            day = hour * 24;
+
+        var timerID = setInterval(updateTime, 1000);
+        let targetDate = new Date('Aug 17, 2020 18:58:00').getTime()
+
+        updateTime();
+        function updateTime() {
+            var currentDate = new Date().getTime();
+            distance = targetDate - currentDate;
+
+            if (distance > 0) {
+                clock.finished = false
+                clock.days =  Math.floor(distance / (day))
+                clock.hours = Math.floor((distance % (day)) / (hour))
+                clock.minutes = Math.floor((distance % (hour)) / (minute))
+                clock.seconds = Math.floor((distance % (minute)) / second);
+            } else {
+                clock.finished = true
+            }
+
+            
+        };
+
     </script>
 </body>
 </html>
