@@ -18,7 +18,7 @@
         </div>
 
         <div v-else="finished">
-            <!-- <h1> JIN 2003 </h1> -->
+            <h1> COUNTDOWN NAAR DE NIEUWE SCOUTSEVERGEM.BE </h1>
             <ul>
               <li><span id="days">{{days}}</span>Dagen</li>
               <li><span id="hours">{{hours}}</span>Uren</li>
@@ -66,7 +66,7 @@
             day = hour * 24;
 
         var timerID = setInterval(updateTime, 1000);
-        let targetDate = new Date('Apr 18, 2020 14:00:00').getTime()
+        let targetDate = new Date('Apr 18, 2021 14:00:00').getTime()
 
         updateTime();
         function updateTime() {
